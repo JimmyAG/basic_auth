@@ -1,4 +1,5 @@
-const { DefinePlugin } = require('webpack')
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable no-undef */
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 module.exports = {
