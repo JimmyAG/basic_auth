@@ -1,52 +1,52 @@
-import Form from "./form-components/Form";
-import FormInput from "./form-components/FormInput";
-import { SubmitHandler } from "react-hook-form";
-import FormSubmitButton from "./form-components/SubmitButton";
-import { z } from "zod";
-import EyeIcon from "../icons/EyeIcon";
-import { useState } from "react";
-import EyeSlashIcon from "../icons/EyeSlashIcon";
-import { useZodForm } from "../../lib/zod/zod";
-import { registerSchema } from "../../lib/schema/signInSchema";
-import { useNavigate } from "react-router-dom";
-import { notify } from "../../lib/toast";
+import Form from './form-components/Form'
+import FormInput from './form-components/FormInput'
+import { SubmitHandler } from 'react-hook-form'
+import FormSubmitButton from './form-components/SubmitButton'
+import { z } from 'zod'
+import EyeIcon from '../icons/EyeIcon'
+import { useState } from 'react'
+import EyeSlashIcon from '../icons/EyeSlashIcon'
+import { useZodForm } from '../../lib/zod/zod'
+import { registerSchema } from '../../lib/schema/signInSchema'
+import { useNavigate } from 'react-router-dom'
+import { notify } from '../../lib/toast'
 
-type SignupFormSchemaType = z.infer<typeof registerSchema>;
+type SignupFormSchemaType = z.infer<typeof registerSchema>
 
 const SignupForm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const navigate = useNavigate()
   const form = useZodForm({
     schema: registerSchema,
-  });
+  })
 
   const handleSubmit: SubmitHandler<SignupFormSchemaType> = async (data) => {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
+      const res = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      });
+      })
 
-      const responseObject = await res.json();
+      const responseObject = await res.json()
 
       if (!res.ok) {
-        notify(responseObject.message, "failure");
+        notify(responseObject.message, 'failure')
       } else {
-        if (res.ok) notify(responseObject.message, "success");
+        if (res.ok) notify(responseObject.message, 'success')
 
-        navigate("/login");
+        navigate('/login')
       }
     } catch (err) {
-      notify(JSON.stringify(err), "failure");
+      notify(JSON.stringify(err), 'failure')
     }
 
-    setLoading(false);
-  };
+    setLoading(false)
+  }
 
   return (
     <Form form={form} onSubmit={handleSubmit}>
@@ -56,15 +56,15 @@ const SignupForm = () => {
           placeholder="johndoe@email.com"
           required
           type="text"
-          {...form.register("email")}
+          {...form.register('email')}
         />
 
         <div className="relative">
           <FormInput
             label="Password"
             required
-            type={showPassword ? "text" : "password"}
-            {...form.register("password")}
+            type={showPassword ? 'text' : 'password'}
+            {...form.register('password')}
           />
 
           <div
@@ -83,8 +83,8 @@ const SignupForm = () => {
           <FormInput
             label="Confirm password"
             required
-            type={showPassword ? "text" : "password"}
-            {...form.register("confirmPassword")}
+            type={showPassword ? 'text' : 'password'}
+            {...form.register('confirmPassword')}
           />
 
           <div
@@ -104,7 +104,7 @@ const SignupForm = () => {
         </FormSubmitButton>
       </div>
     </Form>
-  );
-};
+  )
+}
 
-export default SignupForm;
+export default SignupForm
