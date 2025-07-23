@@ -1,3 +1,5 @@
+.env values are in backend/.env.example
+
 # React-Nest
 
 Install / run instructions at the bottom!
