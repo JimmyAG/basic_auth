@@ -25,7 +25,7 @@ Install / run instructions at the bottom!
 
 1. Change directory into the `frontend` folder
 2. Run `npm i` to install dependencies
-3. Run `npm run start` to start the dev server on port `8080`
+3. Run `npm run start` to start the dev server on `localhost` port `8080`
 
 ```bash
 cd frontend
